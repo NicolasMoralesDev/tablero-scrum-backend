@@ -1,0 +1,29 @@
+<FindBugsFilter>
+    <!-- Ignorar clases generadas por MapStruct -->
+    <Match>
+        <Class name="~.*\.mapper\..*Impl"/>
+    </Match>
+
+    <!-- Ignorar clases metamodel de JPA (terminan en _) -->
+    <Match>
+        <Class name="~.*\..*_" />
+    </Match>
+
+    <!-- Ignorar exponer listas u objetos mutables en DTOs -->
+    <Match>
+        <Class name="~com\.nicolasmorales\.dto\..*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+
+    <Match>
+        <Class name="~com\.nicolasmorales\.entity\..*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+
+    <!-- Ignorar dead local store en el repository -->
+    <Match>
+        <Class name="com.nicolasmorales.repository.impl.TarjetaRepository"/>
+        <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
+    </Match>
+
+</FindBugsFilter>

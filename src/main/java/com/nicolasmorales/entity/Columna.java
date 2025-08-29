@@ -1,12 +1,15 @@
 package com.nicolasmorales.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "COLUMNAS")
 public class Columna {
 
