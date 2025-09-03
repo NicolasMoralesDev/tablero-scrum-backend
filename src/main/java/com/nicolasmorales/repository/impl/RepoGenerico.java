@@ -1,12 +1,11 @@
 package com.nicolasmorales.repository.impl;
 
 import com.nicolasmorales.repository.IRepoGenerico;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  * Repo generico
  * @param <T>
  */
-public abstract class RepoGenerico<T> implements IRepoGenerico<T> {
+public abstract class RepoGenerico<T> implements IRepoGenerico<T>, PanacheRepository<T> {
 
     /**
      * Entity Manager
@@ -23,21 +22,11 @@ public abstract class RepoGenerico<T> implements IRepoGenerico<T> {
     @PersistenceContext
     private EntityManager entityManagerFactory;
 
-    private final Class<T> tClass;
-
-    public RepoGenerico(Class<T> tClass) {
-        this.tClass = tClass;
-    }
-
     @Override
     @Transactional
     public List<T> obtenerTodos() throws PersistenceException {
         try {
-            CriteriaBuilder cb = entityManagerFactory.getCriteriaBuilder();
-            CriteriaQuery<T> cr = cb.createQuery(tClass);
-            Root<T> root = cr.from(tClass);
-            cr.select(root).where(cb.equal(root.get("borrado"), false));
-            return entityManagerFactory.createQuery(cr).getResultList();
+            return find("borrado=false").stream().toList();
         } catch (PersistenceException e) {
             throw new PersistenceException(e.getMessage());
         }
@@ -57,12 +46,21 @@ public abstract class RepoGenerico<T> implements IRepoGenerico<T> {
     @Transactional
     public T obtenerPorId(Long id) throws PersistenceException {
         try {
-            CriteriaBuilder cb = entityManagerFactory.getCriteriaBuilder();
-            CriteriaQuery<T> cr = cb.createQuery(tClass);
-            Root<T> root = cr.from(tClass);
-            cr.select(root).where(cb.equal(root.get("id"), id),
-                    cb.equal(root.get("borrado"), false));
-            return entityManagerFactory.createQuery(cr).getSingleResult();
+            return find("WHERE id=:id AND borrado=false",
+                    Parameters.with("id", id))
+                    .firstResult();
+        } catch (PersistenceException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public T obtenerPorTitulo(String titulo) throws PersistenceException {
+        try {
+            return find("titulo=:titulo AND borrado=false",
+                    Parameters.with("titulo", titulo))
+                    .firstResult();
         } catch (PersistenceException e) {
             throw new PersistenceException(e.getMessage());
         }

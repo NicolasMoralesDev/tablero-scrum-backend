@@ -35,21 +35,24 @@ public class EtiquetaBO implements IEtiquetaBO  {
 
     @Override
     @Transactional
-    public Object borrarEtiquetaPorId(Long id) throws BussinesException {
+    public void borrarEtiquetaPorId(Long id) throws BussinesException {
         try {
             Etiqueta etiqueta = etiquetaRepository.obtenerPorId(id);
-            etiqueta.setBorrado(true);
+            if (etiqueta != null) {
+                etiqueta.setBorrado(true);
+            } else {
+                throw new BussinesException("Error al intentar borrar la etiqueta con id: "+ id + " no existe!");
+            }
         } catch (PersistenceException e) {
             LOG.error(e);
-            throw new BussinesException("Error al intentar borrar la etiqueta con id: "+ id);
+            throw new BussinesException(e.getMessage());
         }
-        return null;
     }
 
     @Override
     public EtiquetaDTO crearEtiqueta(EtiquetaDTO etiquetaDTO) throws BussinesException {
         try {
-            if (etiquetaRepository.find("nombre", etiquetaDTO.nombre()).firstResult() == null) {
+            if (etiquetaRepository.obtenerEtiquetaPorNombre(etiquetaDTO.nombre()) == null) {
                 etiquetaRepository.guardar(etiquetaMapper.etiquetaDTOToEtiqueta(etiquetaDTO));
                 return etiquetaDTO;
             } else {

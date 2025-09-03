@@ -2,12 +2,14 @@ package com.nicolasmorales.bo.impl;
 
 import com.nicolasmorales.bo.IColumnaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
+import com.nicolasmorales.entity.Columna;
 import com.nicolasmorales.exception.BussinesException;
 import com.nicolasmorales.mapper.IColumnaMapper;
 import com.nicolasmorales.repository.impl.ColumnaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 import org.jboss.logging.Logger;
 
 import java.util.List;
@@ -34,24 +36,31 @@ public class ColumnaBO implements IColumnaBO {
 
     @Override
     public List<ColumnaDTO> obtenerColumnasPorTablero(Long tablero) {
-        return null;
+        return columnaRepository.obtenerColumnaPorTablero(tablero).stream().map(
+                columna -> columnaMapper.columnaToColumnaDTO(columna)
+        ).collect(Collectors.toList());
     }
 
     @Override
-    public Object borrarColumnaPorId(Long id) throws BussinesException {
+    @Transactional
+    public void borrarColumnaPorTitulo(String titulo) throws BussinesException {
         try {
-            columnaRepository.borrarPorId(id);
+            Columna columna = columnaRepository.obtenerPorTitulo(titulo);
+            if (columna != null) {
+                columna.setBorrado(true);
+            } else {
+                throw new BussinesException("Error al borrar, no se encontro la columna ");
+            }
         } catch (PersistenceException e) {
             LOG.error(e.getMessage());
-            throw new BussinesException("Error al intentar borrar la columna");
+            throw new BussinesException(e.getMessage());
         }
-        return null;
     }
 
     @Override
     public ColumnaDTO crearColumna(ColumnaDTO columna) throws BussinesException {
        try {
-           if (columnaRepository.find("titulo", columna.titulo()).firstResult() == null) {
+           if (columnaRepository.obtenerPorTitulo(columna.titulo()) == null) {
                columnaRepository.guardar(columnaMapper.columnaDTOToColumna(columna));
                return columna;
            } else {

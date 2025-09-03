@@ -9,7 +9,7 @@ public interface IEtiquetaBO {
 
     List<EtiquetaDTO> obtenerEtiquetas();
 
-    Object borrarEtiquetaPorId(Long id) throws BussinesException;
+    void borrarEtiquetaPorId(Long id) throws BussinesException;
 
     EtiquetaDTO crearEtiqueta(EtiquetaDTO etiquetaDTO) throws BussinesException;
 

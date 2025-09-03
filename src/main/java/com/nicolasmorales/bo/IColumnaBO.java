@@ -11,7 +11,7 @@ public interface IColumnaBO {
 
     List<ColumnaDTO> obtenerColumnasPorTablero(Long tablero);
 
-    Object borrarColumnaPorId(Long id) throws BussinesException;
+    void borrarColumnaPorTitulo(String titulo) throws BussinesException;
 
     ColumnaDTO crearColumna(ColumnaDTO columna) throws BussinesException;
 }

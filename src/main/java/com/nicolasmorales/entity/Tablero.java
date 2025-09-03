@@ -1,6 +1,7 @@
 package com.nicolasmorales.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -27,4 +28,13 @@ public class Tablero {
     @Column(name = "BORRADO")
     private boolean borrado;
 
+    public Tablero() {
+    }
+
+    public Tablero(Long id, String titulo, String descripcion, LocalDate fechaDeCreacion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaDeCreacion = fechaDeCreacion;
+    }
 }

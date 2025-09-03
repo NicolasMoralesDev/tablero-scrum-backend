@@ -1,7 +1,6 @@
 package com.nicolasmorales.repository.impl;
 
 import com.nicolasmorales.entity.Tarjeta;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -13,8 +12,7 @@ import jakarta.persistence.criteria.Root;
 import java.util.List;
 
 @ApplicationScoped
-public class TarjetaRepository extends RepoGenerico<Tarjeta> implements PanacheRepository<Tarjeta> {
-    public TarjetaRepository() { super(Tarjeta.class); }
+public class TarjetaRepository extends RepoGenerico<Tarjeta> {
 
     /**
      * Entity Manager

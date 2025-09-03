@@ -28,6 +28,7 @@ public class TableroController {
 
     @DELETE
     public Response borrarTablero(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(tableroBO.borrarTableroPorId(id)).build() ;
+        tableroBO.borrarTableroPorId(id);
+        return Response.ok().build();
     }
 }

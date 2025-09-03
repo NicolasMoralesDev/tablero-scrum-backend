@@ -29,6 +29,7 @@ public class EtiquetaController {
 
     @DELETE
     public Response borrarEtiqueta(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(etiquetaBO.borrarEtiquetaPorId(id)).build() ;
+        etiquetaBO.borrarEtiquetaPorId(id);
+        return Response.ok().build() ;
     }
 }

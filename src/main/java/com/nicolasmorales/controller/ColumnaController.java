@@ -21,13 +21,13 @@ public class ColumnaController {
 
     @GET
     public Response obtenerColumnas() {
-        return Response.ok(columnaBO.obtenerColumnas()).build() ;
+        return Response.ok(columnaBO.obtenerColumnas()).build();
     }
 
     @GET
     @Path("/tablero")
     public Response obtenerColumnasPorTablero(@QueryParam(value = "tablero") Long tablero) {
-        return Response.ok(columnaBO.obtenerColumnasPorTablero(tablero)).build() ;
+        return Response.ok(columnaBO.obtenerColumnasPorTablero(tablero)).build();
     }
 
     @POST
@@ -36,8 +36,9 @@ public class ColumnaController {
     }
 
     @DELETE
-    public Response borrarColumna(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(columnaBO.borrarColumnaPorId(id)).build() ;
+    public Response borrarColumna(@QueryParam(value = "titulo") String titulo) throws BussinesException {
+        columnaBO.borrarColumnaPorTitulo(titulo);
+        return Response.ok().build() ;
     }
 
 }

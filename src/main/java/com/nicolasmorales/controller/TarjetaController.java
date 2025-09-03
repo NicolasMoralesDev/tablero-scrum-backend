@@ -35,6 +35,7 @@ public class TarjetaController {
 
     @DELETE
     public Response borrarTarjeta(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(tarjetaBO.borrarTarjetaPorId(id)).build() ;
+        tarjetaBO.borrarTarjetaPorId(id);
+        return Response.ok().build() ;
     }
 }
