@@ -2,6 +2,7 @@ package com.nicolasmorales.controller;
 
 import com.nicolasmorales.bo.IColumnaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
+import com.nicolasmorales.dto.RESTResponse;
 import com.nicolasmorales.entity.Columna;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
@@ -38,7 +39,7 @@ public class ColumnaController {
     @DELETE
     public Response borrarColumna(@QueryParam(value = "titulo") String titulo) throws BussinesException {
         columnaBO.borrarColumnaPorTitulo(titulo);
-        return Response.ok().build() ;
+        return Response.ok(new RESTResponse("Columna borrada con éxito!")).build();
     }
 
 }

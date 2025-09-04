@@ -1,6 +1,6 @@
 package com.nicolasmorales.dto;
 
-public record RestResponse(
+public record RESTResponse(
       String msg
 ) {
 }
