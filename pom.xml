@@ -101,6 +101,11 @@
             <version>1.5.5.Final</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Health Check -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
