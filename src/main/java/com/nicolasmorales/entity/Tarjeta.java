@@ -17,7 +17,7 @@ public class Tarjeta {
     private Long id;
     @Column(name = "TITULO")
     private String titulo;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Etiqueta> etiquetas;
     @Column(name = "DESCRIPCION")
     private String descripcion;

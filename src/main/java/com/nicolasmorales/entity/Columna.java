@@ -10,13 +10,14 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "COLUMNAS")
 public class Columna {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Tarjeta> tarjetas;
     @ManyToOne
     @JoinColumn(name = "tablero_id", referencedColumnName = "ID")
