@@ -13,7 +13,6 @@ public interface ITableroMapper {
             @Mapping(target = "id", source = "tablero.id"),
             @Mapping(target = "titulo", source = "tablero.titulo"),
             @Mapping(target = "descripcion", source = "tablero.descripcion"),
-            @Mapping(target = "columnas",  source = "tablero.columnas", ignore = true),
             @Mapping(target = "fechaDeCreacion", source = "tablero.fechaDeCreacion", dateFormat = "ddMMyyyy"),
             @Mapping(target = "borrado", source = "tablero.borrado"),
     })
@@ -23,7 +22,6 @@ public interface ITableroMapper {
             @Mapping(target = "id", source = "tablero.id", ignore = true),
             @Mapping(target = "titulo", source = "tablero.titulo"),
             @Mapping(target = "descripcion", source = "tablero.descripcion"),
-            @Mapping(target = "columnas", source = "tablero.columnas", ignore = true),
             @Mapping(target = "fechaDeCreacion", source = "tablero.fechaDeCreacion", dateFormat = "ddMMyyyy"),
             @Mapping(target = "borrado", source = "tablero.borrado"),
     })

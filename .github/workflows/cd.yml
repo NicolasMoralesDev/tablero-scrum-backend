@@ -1,36 +1,47 @@
-name: CD build
+name: Deploy
 
 on:
   workflow_dispatch:
 
 env:
-  IMAGE_TAG: ${{ github.sha }}
   IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.NOMBRE_BASE }}
+
 jobs:
-  build:
+  deploy_job:
+    name: Construir y subir Docker
     runs-on: ubuntu-latest
     environment: desa
     steps:
-      - name: Checkout
+      - name: Checkout del repositorio
         uses: actions/checkout@v4
 
       - name: Pull Artifact
-        uses: actions/download-artifact@v4
+        uses: dawidd6/action-download-artifact@v3
         with:
-          name: $IMAGE_TAG
+          workflow: ci.yml
+          name: app-artifact
+          path: target
+          repo: ${{ github.repository }}
 
-      - name: Login Docker
+      - name: Obtener el SHA corto de commit
+        id: short-sha
+        uses: benjlevesque/short-sha@v3.0
+
+      - name: Sanitizar nombre de la rama
+        id: branch_name
+        run: |
+          SANITIZED_BRANCH=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
+          echo "sanitized_branch=${SANITIZED_BRANCH}" >> $GITHUB_OUTPUT
+
+      - name: Login Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build image
+      - name: Construir y subir imagen
         run: |
-         echo "Construyendo la imagen con la etiqueta: $IMAGE_NAME:$IMAGE_TAG"
-         docker build -f src/main/docker/Dockerfile.jvm -t $IMAGE_NAME:$IMAGE_TAG .
-
-      - name: Push Docker image
-        run: |
-          echo "Desplegando la imagen: $IMAGE_NAME:$IMAGE_TAG"
-          docker push $IMAGE_NAME:$IMAGE_TAG
+          IMAGE_TAG="${{ steps.branch_name.outputs.sanitized_branch }}-${{ steps.short-sha.outputs.sha }}"
+          echo "Construyendo la imagen: ${{ env.IMAGE_NAME }}:${IMAGE_TAG}"
+          docker build . -t ${{ env.IMAGE_NAME }}:${IMAGE_TAG}
+          docker push ${{ env.IMAGE_NAME }}:${IMAGE_TAG}

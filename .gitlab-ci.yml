@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test
+  - package
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+
+build-job:
+  stage: build
+  image: maven:3.9.5-amazoncorretto-17
+  script:
+    - echo "Compiling the Quarkus application..."
+    - ./mvnw compile
+
+test:
+  stage: test
+  image: maven:3.9.5-amazoncorretto-17
+  script:
+    - echo "Running tests..."
+    - ./mvnw verify
+
+package-job:
+  stage: package
+  image: maven:3.9.5-amazoncorretto-17
+  script:
+    - echo "Packaging the application..."
+    - ./mvnw package -Dquarkus.container-image.group=$CI_PROJECT_PATH -Dquarkus.container-image.name=$CI_PROJECT_NAME -Dquarkus.container-image.tag=$CI_COMMIT_SHORT_SHA
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 1 week

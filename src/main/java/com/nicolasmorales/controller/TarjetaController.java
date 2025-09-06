@@ -2,6 +2,7 @@ package com.nicolasmorales.controller;
 
 import com.nicolasmorales.bo.ITarjetaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
+import com.nicolasmorales.dto.RESTResponse;
 import com.nicolasmorales.dto.TarjetaDTO;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
@@ -35,6 +36,7 @@ public class TarjetaController {
 
     @DELETE
     public Response borrarTarjeta(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(tarjetaBO.borrarTarjetaPorId(id)).build() ;
+        tarjetaBO.borrarTarjetaPorId(id);
+        return Response.ok(new RESTResponse("Tarjeta borrada con éxito!")).build();
     }
 }

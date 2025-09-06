@@ -1,6 +1,7 @@
 package com.nicolasmorales.controller;
 
 import com.nicolasmorales.bo.ITableroBO;
+import com.nicolasmorales.dto.RESTResponse;
 import com.nicolasmorales.dto.TableroDTO;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
@@ -28,6 +29,7 @@ public class TableroController {
 
     @DELETE
     public Response borrarTablero(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(tableroBO.borrarTableroPorId(id)).build() ;
+        tableroBO.borrarTableroPorId(id);
+        return Response.ok(new RESTResponse("Tablero borrada con éxito!")).build();
     }
 }

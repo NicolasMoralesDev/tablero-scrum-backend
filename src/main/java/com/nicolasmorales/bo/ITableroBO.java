@@ -9,7 +9,7 @@ public interface ITableroBO {
 
     List<TableroDTO> obtenerTableros();
 
-    Object borrarTableroPorId(Long id) throws BussinesException;
+    void borrarTableroPorId(Long id) throws BussinesException;
 
     TableroDTO crearTablero(TableroDTO tableroDTO) throws BussinesException;
 }

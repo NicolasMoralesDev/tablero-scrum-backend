@@ -1,0 +1,1 @@
+FROM nicodev10/utilidades:quarkus-base-01

@@ -2,6 +2,8 @@ package com.nicolasmorales.controller;
 
 import com.nicolasmorales.bo.IColumnaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
+import com.nicolasmorales.dto.RESTResponse;
+import com.nicolasmorales.entity.Columna;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -20,13 +22,13 @@ public class ColumnaController {
 
     @GET
     public Response obtenerColumnas() {
-        return Response.ok(columnaBO.obtenerColumnas()).build() ;
+        return Response.ok(columnaBO.obtenerColumnas()).build();
     }
 
     @GET
     @Path("/tablero")
     public Response obtenerColumnasPorTablero(@QueryParam(value = "tablero") Long tablero) {
-        return Response.ok(columnaBO.obtenerColumnasPorTablero(tablero)).build() ;
+        return Response.ok(columnaBO.obtenerColumnasPorTablero(tablero)).build();
     }
 
     @POST
@@ -35,8 +37,9 @@ public class ColumnaController {
     }
 
     @DELETE
-    public Response borrarColumna(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(columnaBO.borrarColumnaPorId(id)).build() ;
+    public Response borrarColumna(@QueryParam(value = "titulo") String titulo) throws BussinesException {
+        columnaBO.borrarColumnaPorTitulo(titulo);
+        return Response.ok(new RESTResponse("Columna borrada con éxito!")).build();
     }
 
 }

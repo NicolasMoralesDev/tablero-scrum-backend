@@ -1,14 +1,12 @@
 package com.nicolasmorales.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 public record TableroDTO(
          Long id,
          String titulo,
          String descripcion,
-         List<ColumnaDTO> columnas,
-         LocalDateTime fechaDeCreacion,
+         LocalDate fechaDeCreacion,
          boolean borrado
 ) {
 }

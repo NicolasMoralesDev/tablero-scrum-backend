@@ -3,6 +3,7 @@ package com.nicolasmorales.controller;
 import com.nicolasmorales.bo.IEtiquetaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
 import com.nicolasmorales.dto.EtiquetaDTO;
+import com.nicolasmorales.dto.RESTResponse;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -29,6 +30,7 @@ public class EtiquetaController {
 
     @DELETE
     public Response borrarEtiqueta(@QueryParam(value = "id") Long id) throws BussinesException {
-        return Response.ok(etiquetaBO.borrarEtiquetaPorId(id)).build() ;
+        etiquetaBO.borrarEtiquetaPorId(id);
+        return Response.ok(new RESTResponse("Etiqueta borrada con éxito!")).build();
     }
 }

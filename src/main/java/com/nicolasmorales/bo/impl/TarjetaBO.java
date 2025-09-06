@@ -43,21 +43,24 @@ public class TarjetaBO implements ITarjetaBO {
 
     @Override
     @Transactional
-    public Object borrarTarjetaPorId(Long id) throws BussinesException {
+    public void borrarTarjetaPorId(Long id) throws BussinesException {
         try {
             Tarjeta tarjeta = tarjetaRepository.obtenerPorId(id);
-            tarjeta.setBorrado(true);
+            if (tarjeta != null) {
+                tarjeta.setBorrado(true);
+            } else {
+                throw new BussinesException("Error al intentar borrar la tarjeta con id: "+ id + " no existe!");
+            }
         } catch (PersistenceException e) {
             LOG.error(e);
             throw new BussinesException("Error al intentar borrar la tarjeta con id: "+ id);
         }
-        return null;
     }
 
     @Override
     public TarjetaDTO crearTarjeta(TarjetaDTO tarjetaDTO) throws BussinesException {
         try {
-            if (tarjetaRepository.find("titulo", tarjetaDTO.titulo()).firstResult() == null) {
+            if (tarjetaRepository.obtenerPorTitulo(tarjetaDTO.titulo()) == null) {
                 tarjetaRepository.guardar(tarjetaMapper.tarjetaDTOToTarjeta(tarjetaDTO));
                 return tarjetaDTO;
             } else {

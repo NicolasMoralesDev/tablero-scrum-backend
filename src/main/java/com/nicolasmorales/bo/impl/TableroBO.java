@@ -35,21 +35,24 @@ public class TableroBO implements ITableroBO {
 
     @Override
     @Transactional
-    public Object borrarTableroPorId(Long id) throws BussinesException {
+    public void borrarTableroPorId(Long id) throws BussinesException {
         try {
             Tablero tablero = tableroRepository.obtenerPorId(id);
-            tablero.setBorrado(true);
+            if (tablero != null) {
+                tablero.setBorrado(true);
+            } else {
+                throw new BussinesException("Error al intentar borrar el tablero con id: "+ id + " no existe!");
+            }
         } catch (PersistenceException e) {
             LOG.error(e);
-            throw new BussinesException("Error al intentar borrar el tablero con id: "+ id);
+            throw new BussinesException(e.getMessage());
         }
-        return null;
     }
 
     @Override
     public TableroDTO crearTablero(TableroDTO tableroDTO) throws BussinesException {
         try {
-            if (tableroRepository.find("titulo", tableroDTO.titulo()).firstResult() == null) {
+            if (tableroRepository.obtenerPorTitulo(tableroDTO.titulo()) == null) {
                 tableroRepository.guardar(tableroMapper.tableroDTOToTablero(tableroDTO));
                 return tableroDTO;
             } else {
