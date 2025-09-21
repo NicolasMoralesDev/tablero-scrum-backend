@@ -3,10 +3,12 @@ package com.nicolasmorales.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "ETIQUETAS")
+@NoArgsConstructor
 public class Etiqueta {
 
     @Id
@@ -17,4 +19,7 @@ public class Etiqueta {
     @Column(name = "BORRADO")
     private boolean borrado;
 
+    public Etiqueta(String nombre) {
+        this.nombre = nombre;
+    }
 }
