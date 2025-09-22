@@ -26,6 +26,9 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: Test
+        run: ./mvnw clean test
+
       - name: Code Quality
         run: ./mvnw clean verify
 

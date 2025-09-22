@@ -20,7 +20,7 @@ public abstract class RepoGenerico<T> implements IRepoGenerico<T>, PanacheReposi
      * Entity Manager
      */
     @PersistenceContext
-    private EntityManager entityManagerFactory;
+    EntityManager entityManagerFactory;
 
     @Override
     @Transactional
