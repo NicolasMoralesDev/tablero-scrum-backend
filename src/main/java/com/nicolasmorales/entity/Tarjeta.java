@@ -27,4 +27,21 @@ public class Tarjeta {
     @Column(name = "BORRADO")
     private boolean borrado;
 
+    public Tarjeta() {
+    }
+
+    /**
+     * Constructor para pruebas unitarias
+     */
+    public Tarjeta(Long id, String titulo, List<Etiqueta> etiquetas,
+                   String descripcion,
+                   LocalDateTime fechaDeCreacion, boolean borrado) {
+        this.id = id;
+        this.titulo = titulo;
+        this.etiquetas = etiquetas;
+        this.descripcion = descripcion;
+        this.fechaDeCreacion = fechaDeCreacion;
+        this.borrado = borrado;
+    }
+
 }

@@ -1,4 +1,5 @@
 package com.nicolasmoralesTest;
+
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
@@ -13,5 +14,4 @@ class GreetingResourceTest {
                 .then()
                 .statusCode(404);
     }
-
 }

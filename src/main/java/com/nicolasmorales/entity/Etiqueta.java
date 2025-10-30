@@ -22,4 +22,13 @@ public class Etiqueta {
     public Etiqueta(String nombre) {
         this.nombre = nombre;
     }
+
+    /**
+      Constructor para pruebas unitarias
+     */
+    public Etiqueta(Long id, String nombre, boolean borrado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.borrado = borrado;
+    }
 }

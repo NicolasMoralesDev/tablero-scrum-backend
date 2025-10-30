@@ -3,14 +3,11 @@ package com.nicolasmorales.controller;
 import com.nicolasmorales.bo.IColumnaBO;
 import com.nicolasmorales.dto.ColumnaDTO;
 import com.nicolasmorales.dto.RESTResponse;
-import com.nicolasmorales.entity.Columna;
 import com.nicolasmorales.exception.BussinesException;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import java.util.List;
 
 @Path("/columnas")
 @Produces(MediaType.APPLICATION_JSON)
