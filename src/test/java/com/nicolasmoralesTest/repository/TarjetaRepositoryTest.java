@@ -21,35 +21,35 @@ public class TarjetaRepositoryTest {
     TarjetaRepository tarjetaRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         Tarjeta tarjeta = new Tarjeta(null, "AGREGAR ENPOINTS", null, "agregar endpoints para la api rest",
                 null, false);
         tarjetaRepository.persist(tarjeta);
     }
 
     @Test
-    public void obtenerTodas() {
+    void obtenerTodas() {
        List<Tarjeta> tarjetas = tarjetaRepository.obtenerTodos();
        assertNotNull(tarjetas);
        assertEquals(2, tarjetas.size());
     }
 
     @Test
-    public void obtenerTarjetasPorId() {
+    void obtenerTarjetasPorId() {
         Tarjeta tarjeta = tarjetaRepository.obtenerPorId(1L);
         assertNotNull(tarjeta);
         assertEquals(1L, tarjeta.getId());
     }
 
     @Test
-    public void obtenerTarjetaPorTitulo() {
+    void obtenerTarjetaPorTitulo() {
         Tarjeta tarjeta = tarjetaRepository.obtenerPorTitulo("AGREGAR ENPOINTS");
         assertNotNull(tarjeta);
         assertEquals("AGREGAR ENPOINTS", tarjeta.getTitulo());
     }
 
     @Test
-    public void guardarTarjetasTest() {
+    void guardarTarjetasTest() {
         Tarjeta tarjeta = new Tarjeta(null, "ARMAR LOS MANIFIESTOS DE KUBERNETES", null, "agregar los manifiestos de kubernetes",
                 null, false);
         tarjetaRepository.guardar(tarjeta);

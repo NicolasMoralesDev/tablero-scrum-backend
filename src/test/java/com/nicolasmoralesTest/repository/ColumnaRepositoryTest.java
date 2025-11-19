@@ -26,7 +26,7 @@ public class ColumnaRepositoryTest {
     TableroRepository tableroRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         Tablero tablero = new Tablero(null, "PROYTECTO SCRUM", "API CON QUARKUS", null);
         Columna columna = new Columna(null, null, null, "DONE", false);
         columnaRepository.persist(columna);
@@ -34,28 +34,28 @@ public class ColumnaRepositoryTest {
     }
 
     @Test
-    public void obtenerColumnasPorTableroTest() {
+    void obtenerColumnasPorTableroTest() {
        List<Columna> columnas = columnaRepository.obtenerColumnaPorTablero(1L);
        assertNotNull(columnas);
        assertEquals(0, columnas.size());
     }
 
     @Test
-    public void obtenerColumnasPorNombreTest() {
+    void obtenerColumnasPorNombreTest() {
         Columna columna = columnaRepository.obtenerPorTitulo("DONE");
         assertNotNull(columna);
         assertEquals("DONE", columna.getTitulo());
     }
 
     @Test
-    public void obtenerColumnaPorIdTest() {
+    void obtenerColumnaPorIdTest() {
         Columna columna = columnaRepository.obtenerPorId(1L);
         assertEquals(1L, columna.getId());
         assertNotNull(columna);
     }
 
     @Test
-    public void guardarColumnaTest() {
+    void guardarColumnaTest() {
         Columna columna = new Columna(null, null , null, "DONE", false);
         columnaRepository.guardar(columna);
         Columna columna1 = columnaRepository.obtenerPorTitulo("DONE");
@@ -63,7 +63,7 @@ public class ColumnaRepositoryTest {
     }
 
     @Test
-    public void obtenerColumnasTest() {
+    void obtenerColumnasTest() {
         List<Columna> columnas = columnaRepository.obtenerTodos();
         assertNotNull(columnas);
     }

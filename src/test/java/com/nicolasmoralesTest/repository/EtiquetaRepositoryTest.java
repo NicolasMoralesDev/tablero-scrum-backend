@@ -21,33 +21,33 @@ public class EtiquetaRepositoryTest {
     EtiquetaRepository etiquetaRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         etiquetaRepository.persist(new Etiqueta("EN TESTING"));
     }
 
     @Test
-    public void obtenerTodasTest() {
+    void obtenerTodasTest() {
         List<Etiqueta> etiquetas = etiquetaRepository.obtenerTodos();
         assertNotNull(etiquetas);
         assertEquals(1, etiquetas.size());
     }
 
     @Test
-    public void obtenerEtiquetaPorNombreTest() {
+    void obtenerEtiquetaPorNombreTest() {
         Etiqueta etiqueta = etiquetaRepository.obtenerEtiquetaPorNombre("EN TESTING");
         assertNotNull(etiqueta);
         assertEquals("EN TESTING", etiqueta.getNombre());
     }
 
     @Test
-    public void obtenerEtiquetaPorIdTest() {
+    void obtenerEtiquetaPorIdTest() {
         Etiqueta etiqueta = etiquetaRepository.obtenerPorId(1L);
         assertNotNull(etiqueta);
         assertEquals(1L, etiqueta.getId());
     }
 
     @Test
-    public void guardarEtiquetaTest() {
+    void guardarEtiquetaTest() {
         etiquetaRepository.guardar(new Etiqueta("EN DESARROLLO"));
         Etiqueta etiqueta = etiquetaRepository.obtenerEtiquetaPorNombre("EN DESARROLLO");
         assertNotNull(etiqueta);

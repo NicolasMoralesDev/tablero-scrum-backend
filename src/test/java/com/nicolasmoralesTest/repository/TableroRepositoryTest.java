@@ -23,33 +23,33 @@ public class TableroRepositoryTest {
     Tablero tablero;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         tablero = new Tablero(null, "PROYECTO QUARKUS", "Proyecto con quarkus y test", null);
         tableroRepository.persist(tablero);
     }
 
     @Test
-    public void obtenerTodosTest() {
+    void obtenerTodosTest() {
         List<Tablero> tableros = tableroRepository.obtenerTodos();
         assertNotNull(tableros);
         assertEquals(2, tableros.size());
     }
 
     @Test
-    public void obtenerTableroPorIdTest() {
+    void obtenerTableroPorIdTest() {
         Tablero tablero = tableroRepository.obtenerPorId(1L);
         assertNotNull(tablero);
         assertEquals(1L, tablero.getId());
     }
 
     @Test
-    public void obtenerTableroPorTitulo() {
+    void obtenerTableroPorTitulo() {
         Tablero tablero = tableroRepository.obtenerPorTitulo("PROYECTO QUARKUS");
         assertNotNull(tablero);
     }
 
     @Test
-    public void guardarTableroTest() {
+    void guardarTableroTest() {
         Tablero tablero = new Tablero(null, "PROYECTO NEXT", "Proyecto con quarkus y test", null);
         tableroRepository.guardar(tablero);
         Tablero tablero1 = tableroRepository.obtenerPorTitulo(tablero.getTitulo());

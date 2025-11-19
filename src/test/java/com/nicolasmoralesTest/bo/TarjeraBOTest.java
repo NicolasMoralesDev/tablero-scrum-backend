@@ -34,14 +34,14 @@ public class TarjeraBOTest {
     private Tarjeta tarjeta;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         tarjeta = new Tarjeta(1L, "FIX COLUMNAS", null, "Se agreglan columnas",
                 null, false);
     }
 
     @Test
     @DisplayName(value = "getTarjetasBO")
-    public void obtenerTarjetasTest() {
+    void obtenerTarjetasTest() {
         //Arrange
         when(tarjetaRepository.obtenerTodos()).thenReturn(List.of(tarjeta));
         //Act
@@ -53,7 +53,7 @@ public class TarjeraBOTest {
 
     @Test
     @DisplayName(value = "deleteTarjetasBO")
-    public void borrarTarjetaPorIdTest() throws BussinesException {
+    void borrarTarjetaPorIdTest() throws BussinesException {
         //Arrange
         when(tarjetaRepository.obtenerPorId(1L)).thenReturn(tarjeta);
         when(tarjetaRepository.findById(1L)).thenReturn(tarjeta);
@@ -71,7 +71,7 @@ public class TarjeraBOTest {
 
     @Test
     @DisplayName(value = "postTarjetaExistenteBO")
-    public void crearTarjetaExistenteTest() {
+    void crearTarjetaExistenteTest() {
         //Arrange
         TarjetaDTO tarjetaDTO = new TarjetaDTO(1L, "FIX COLUMNAS", "Se agreglan columnas",null ,
                 null, false);
@@ -86,7 +86,7 @@ public class TarjeraBOTest {
 
     @Test
     @DisplayName(value = "postTarjetaNoExistenteBO")
-    public void crearTarjetaNoExistenteTest() throws BussinesException {
+    void crearTarjetaNoExistenteTest() throws BussinesException {
         //Arrange
         TarjetaDTO tarjetaDTO = new TarjetaDTO(1L, "FIX COLUMNAS", "Se agreglan columnas",null ,
                 null, false);

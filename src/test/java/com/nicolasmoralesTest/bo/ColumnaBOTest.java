@@ -29,12 +29,12 @@ public class ColumnaBOTest {
     IColumnaMapper columnaMapper;
 
     @InjectMocks
-    private ColumnaBO columnaBO;
+    ColumnaBO columnaBO;
 
     private Columna columna;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 //        Tablero tablero = new Tablero(1L, "Proyecto Quarkus", "Proyecto completo con quarkus",
 //                LocalDate.now());
         columna = new Columna(1L, null,
@@ -43,7 +43,7 @@ public class ColumnaBOTest {
 
     @Test
     @DisplayName(value = "postColumnaExistenteBO")
-    public void crearColumnaExistenteTest() {
+    void crearColumnaExistenteTest() {
         //Arrange
         ColumnaDTO columnaDTO1 = new ColumnaDTO(1L, null,
                 null, "DONE", false);
@@ -58,7 +58,7 @@ public class ColumnaBOTest {
 
     @Test
     @DisplayName(value = "postColumnaNoExistenteBO")
-    public void crearColumnaNoExistenteTest() throws BussinesException {
+    void crearColumnaNoExistenteTest() throws BussinesException {
         //Arrange
         ColumnaDTO columnaDTO1 = new ColumnaDTO(1L, null,
                 null, "DONE", false);
@@ -72,7 +72,7 @@ public class ColumnaBOTest {
 
     @Test
     @DisplayName(value = "getColumnasBO")
-    public void obtenerColumnasTest() {
+    void obtenerColumnasTest() {
         //Arrange
         when(columnaRepository.obtenerTodos()).thenReturn(List.of(columna));
         //Act
@@ -84,7 +84,7 @@ public class ColumnaBOTest {
 
     @Test
     @DisplayName(value = "borrarColumnaPorTituloBO")
-    public void borrarColumnaPorTituloTest() throws BussinesException {
+    void borrarColumnaPorTituloTest() throws BussinesException {
         //Arrange
         when(columnaRepository.obtenerPorTitulo("Proyecto Quarkus")).thenReturn(columna);
         when(columnaRepository.findById(1L)).thenReturn(columna);

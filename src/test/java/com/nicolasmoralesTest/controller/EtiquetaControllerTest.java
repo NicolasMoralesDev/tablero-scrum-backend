@@ -23,7 +23,7 @@ public class EtiquetaControllerTest {
 
     @Test
     @DisplayName(value = "obtenerEtiquetasController")
-    public void obtenerEtiqueta() {
+    void obtenerEtiqueta() {
         given()
                 .when().get("/etiquetas")
                 .then()
@@ -32,7 +32,7 @@ public class EtiquetaControllerTest {
 
     @Test
     @DisplayName(value = "guardarEtiquetaController")
-    public void guardarEtiquetaTest() throws BussinesException {
+    void guardarEtiquetaTest() throws BussinesException {
         EtiquetaDTO input = new EtiquetaDTO(null,"DONE", false);
         when(etiquetaBO.crearEtiqueta(input)).thenReturn(input);
         given()
@@ -46,7 +46,7 @@ public class EtiquetaControllerTest {
 
     @Test
     @DisplayName("borrarEtiquetaController")
-    public void borrarEtiquetaTest() throws BussinesException {
+    void borrarEtiquetaTest() throws BussinesException {
         EtiquetaDTO input = new EtiquetaDTO(null,"DONE", false);
         EtiquetaDTO mockResponse = new EtiquetaDTO(1L,"DONE", false);
         when(etiquetaBO.crearEtiqueta(input)).thenReturn(mockResponse);

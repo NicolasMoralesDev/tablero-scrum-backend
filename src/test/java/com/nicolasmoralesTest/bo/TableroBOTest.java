@@ -34,14 +34,14 @@ public class TableroBOTest {
     private Tablero tablero;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         tablero = new Tablero(1L, "Nuevo proyecto", "Proyecto en quarkus",
                 null);
     }
 
     @Test
     @DisplayName(value = "getTablerosBO")
-    public void obtenerTablerosTest() {
+    void obtenerTablerosTest() {
         //Arrange
         when(tableroRepository.obtenerTodos()).thenReturn(List.of(tablero));
         //Act
@@ -53,7 +53,7 @@ public class TableroBOTest {
 
     @Test
     @DisplayName(value = "postTableroExistenteBO")
-    public void crearTableroExistenteTest() {
+    void crearTableroExistenteTest() {
         //Arrange
         TableroDTO tableroDTO = new TableroDTO(1L, "Nuevo proyecto", "Proyecto en quarkus",
                 null, false);
@@ -68,7 +68,7 @@ public class TableroBOTest {
 
     @Test
     @DisplayName(value = "postTableroNoExistenteBO")
-    public void crearTableroNoExistenteTest() throws BussinesException {
+    void crearTableroNoExistenteTest() throws BussinesException {
         //Arrange
         TableroDTO tableroDTO = new TableroDTO(1L, "Nuevo proyecto", "Proyecto en quarkus",
                 null, false);
@@ -80,7 +80,7 @@ public class TableroBOTest {
 
     @Test
     @DisplayName(value = "deleteTableroBO")
-    public void borrarTableroTest() throws BussinesException {
+    void borrarTableroTest() throws BussinesException {
         //Arrange
         when(tableroRepository.obtenerPorId(1L)).thenReturn(tablero);
         Tablero tablero1 = tableroRepository.obtenerPorId(1L);

@@ -39,13 +39,13 @@ public class EtiquetaBOTest {
     Etiqueta etiquetaInput;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         etiquetaInput = new Etiqueta(1L, "DONE", false);
     }
 
     @Test
     @DisplayName(value = "getEtiquetasBO")
-    public void obtenerEtiquetasTest() {
+    void obtenerEtiquetasTest() {
         //Arrange
         EtiquetaDTO etiquetaDTO = new EtiquetaDTO(1L, "DONE", false);
         when(etiquetaRepository.obtenerTodos()).thenReturn(List.of(etiquetaInput));
@@ -58,7 +58,7 @@ public class EtiquetaBOTest {
 
     @Test
     @DisplayName(value = "deleteEtiquetaBO")
-    public void borrarEtiquetaTest() throws BussinesException {
+    void borrarEtiquetaTest() throws BussinesException {
         //Arrange
         when(etiquetaRepository.obtenerPorId(1L)).thenReturn(etiquetaInput);
         when(etiquetaRepository.findById(1L)).thenReturn(etiquetaInput);
@@ -76,7 +76,7 @@ public class EtiquetaBOTest {
 
     @Test
     @DisplayName(value = "postEtiquetaNoExistenteBO")
-    public void crearEtiquetaNoExistenteTest() throws BussinesException {
+    void crearEtiquetaNoExistenteTest() throws BussinesException {
         //Arrange
         EtiquetaDTO etiquetaDTO = new EtiquetaDTO(null, "DONE", false);
         when(etiquetaMapper.etiquetaDTOToEtiqueta(etiquetaDTO)).thenReturn(etiquetaInput);
@@ -90,7 +90,7 @@ public class EtiquetaBOTest {
 
     @Test
     @DisplayName(value = "postColumnaExistenteBO")
-    public void crearColumnaExistenteTest() {
+    void crearColumnaExistenteTest() {
         //Arrange
         EtiquetaDTO etiquetaDTO1 = new EtiquetaDTO(1L, "DONE",
                 false);

@@ -31,7 +31,7 @@ public class ColumnaControllerTest {
 
     @Test
     @DisplayName(value = "obtenerColumnasController")
-    public void obtenerColumnas() {
+    void obtenerColumnas() {
         given()
                 .when().get("/columnas")
                 .then()
@@ -59,7 +59,7 @@ public class ColumnaControllerTest {
 
     @Test
     @DisplayName(value = "guardarColumnaController")
-    public void guardarColumna() throws BussinesException {
+    void guardarColumna() throws BussinesException {
         ColumnaDTO input = new ColumnaDTO(null,null,null, "SPRINT 1", false);
         when(columnaBO.crearColumna(input)).thenReturn(input);
           given()
@@ -73,7 +73,7 @@ public class ColumnaControllerTest {
 
     @Test
     @DisplayName(value = "borrarColumnaController")
-    public void borrarColumna() throws BussinesException {
+    void borrarColumna() throws BussinesException {
         given()
                 .queryParam("titulo", "SPRINT 1")
                 .when().delete("/columnas")
