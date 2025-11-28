@@ -32,7 +32,7 @@ public class TableroRepositoryTest {
     void obtenerTodosTest() {
         List<Tablero> tableros = tableroRepository.obtenerTodos();
         assertNotNull(tableros);
-        assertEquals(2, tableros.size());
+        assertEquals(7, tableros.size());
     }
 
     @Test
