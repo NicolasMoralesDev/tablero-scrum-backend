@@ -43,7 +43,8 @@ public class TableroBOTest {
     @DisplayName(value = "getTablerosBO")
     void obtenerTablerosTest() {
         //Arrange
-        when(tableroRepository.obtenerTodos()).thenReturn(List.of(tablero));
+        when(tableroRepository.obtenerTodos()).thenReturn(List.of( new Tablero(1L, "Nuevo proyecto", "Proyecto en quarkus",
+                null)));
         //Act
         List<TableroDTO> tableroDTOS = tableroBO.obtenerTableros();
         //Assert
