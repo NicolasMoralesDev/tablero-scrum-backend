@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class ColumnaBOTest {
 
     @Mock
-    private ColumnaRepository columnaRepository;
+    ColumnaRepository columnaRepository;
 
     @Mock
     IColumnaMapper columnaMapper;

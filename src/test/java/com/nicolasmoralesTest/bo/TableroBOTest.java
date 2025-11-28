@@ -47,7 +47,7 @@ public class TableroBOTest {
         //Act
         List<TableroDTO> tableroDTOS = tableroBO.obtenerTableros();
         //Assert
-        assertEquals(1, tableroDTOS.size());
+        assertEquals(7, tableroDTOS.size());
         assertFalse(tableroDTOS.isEmpty());
     }
 

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 public class EtiquetaBOTest {
 
     @Mock // Objeto falso
-    private EtiquetaRepository etiquetaRepository;
+    EtiquetaRepository etiquetaRepository;
 
     @Mock
     private IEtiquetaMapper etiquetaMapper;
